@@ -1,36 +1,41 @@
 
-// Bind hotkeys.
-chrome.commands.onCommand.addListener(function(command) {
-
-	chrome.storage.sync.get(command, 
+function commandTriggered(command) {
+	chrome.storage.sync.get(
+		command, 
 		function(items) {
 			openBookmarkFolder(items[command]);
 		}
 	);
-	
-});
-
-
-function openBookmarkFolder(id) {
-
-	// Get all bookmarks in the given folder (not including subfolders).
-	chrome.bookmarks.getChildren(id, 
+}
+function openBookmarkFolder(folderId) {
+	chrome.bookmarks.getChildren(
+		folderId,
 		function(results) {
-		
-			// Open the first one, activate it.
-			chrome.tabs.create({url: results[0].url, active: true});
+			openURL(results[0].url, true); // First one is activated, others are not.
 			
-			// Open the rest, in order, deactivated.
-			for (var i = 1; i < results.length; i++) {
-			
-				// If it's not a folder, open it.
-				if(results[i].url != null) {
-					chrome.tabs.create({url: results[i].url, active: false});
-				}
-				
-			}
-			
+			for (var i = 1; i < results.length; i++)
+				openURL(results[i].url);
 		}
 	);
-	
 }
+function openURL(url, active = false) {
+	if(!url)
+		return;
+	
+	chrome.tabs.create(
+		{
+			"url":    url,
+			"active": active
+		},
+		checkError
+	);
+}
+function checkError() {
+	var lastError = chrome.runtime.lastError; // Check lastError so Chrome doesn't output anything to the console.
+	if(lastError)
+		return false;
+	
+	return true;
+}
+
+chrome.commands.onCommand.addListener(commandTriggered);

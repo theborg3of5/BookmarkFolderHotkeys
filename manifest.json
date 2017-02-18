@@ -20,28 +20,28 @@
 	"options_page": "options.html",
 	"commands": {
 		"openBookmarkFolder1": {
-			"description": "Open Bookmark Folder 1"
+			"description": "Open Bookmark Folder 1",
 			"suggested_key": {
 				"default": "Ctrl+Shift+1"
-			},
+			}
 		},
 		"openBookmarkFolder2": {
-			"description": "Open Bookmark Folder 2"
+			"description": "Open Bookmark Folder 2",
 			"suggested_key": {
 				"default": "Ctrl+Shift+2"
-			},
+			}
 		},
 		"openBookmarkFolder3": {
-			"description": "Open Bookmark Folder 3"
+			"description": "Open Bookmark Folder 3",
 			"suggested_key": {
 				"default": "Ctrl+Shift+3"
-			},
+			}
 		},
 		"openBookmarkFolder4": {
-			"description": "Open Bookmark Folder 4"
+			"description": "Open Bookmark Folder 4",
 			"suggested_key": {
 				"default": "Ctrl+Shift+4"
-			},
+			}
 		}
 	}
 }

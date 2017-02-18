@@ -5,32 +5,34 @@
 
 	<body>
 		<br />
+		<p style="font-weight: 600;">Hotkeys can be configured in Chrome Settings > Extensions > Keyboard Shortcuts.</p>
+		<br />
 		<p>Please input the id numbers for each folder. These can be found by right-clicking the folder and selecting "Bookmark Manager". The last part of the url (after #) is the bookmark folder's id number.</p>
-		<br />
 		
-		<p>
-			Bookmark Folder 1: 
-			<input type="text" id="bm1"></input>
-		</p>
-		<p>
-			Bookmark Folder 2: 
-			<input type="text" id="bm2"></input>
-		</p>
-		<p>
-			Bookmark Folder 3: 
-			<input type="text" id="bm3"></input>
-		</p>
-		<p>
-			Bookmark Folder 4: 
-			<input type="text" id="bm4"></input>
-		</p>
-
+		<label>
+			Bookmark Folder 1: <input type="text" id="BookmarkFolderId1" />
+		</label>
+		
 		<br />
+		<label>
+			Bookmark Folder 2: <input type="text" id="BookmarkFolderId2" />
+		</label>
+		
+		<br />
+		<label>
+			Bookmark Folder 3: <input type="text" id="BookmarkFolderId3" />
+		</label>
+		
+		<br />
+		<label>
+			Bookmark Folder 4: <input type="text" id="BookmarkFolderId4" />
+		</label>
+		
+		<br /><br />
 		<button id="save">Save</button>
 		
-		<br />
+		<br /><br />
 		<div id="status"></div>
-		
 	</body>
 	
 	<script src="options.js"></script>
