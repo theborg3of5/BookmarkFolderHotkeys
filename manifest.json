@@ -17,6 +17,7 @@
 		"persistent": false,
 		"scripts": ["background.js"]
 	},
+	"incognito": "split",
 	"options_page": "options.html",
 	"commands": {
 		"openBookmarkFolder1": {
