@@ -1,8 +1,8 @@
 ﻿{
 	"name": "Bookmark Folder Hotkeys",
-	"version": "2.0",
+	"version": "3.0",
 	"description": "Open bookmark folders with up to 4 global keyboard shortcuts.",
-	"manifest_version": 2,
+	"manifest_version": 3,
 	"permissions": [
 		"bookmarks",
 		"storage"
@@ -14,11 +14,12 @@
 		"128": "folderBookmark128.png"
 	},
 	"background": {
-		"persistent": false,
-		"scripts": ["background.js"]
+		"service_worker": "service_worker.js"
 	},
 	"incognito": "split",
-	"options_page": "options.html",
+	"options_ui":  {
+		"page": "options.html"
+	},
 	"commands": {
 		"openBookmarkFolder1": {
 			"description": "Open Bookmark Folder 1",

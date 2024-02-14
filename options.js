@@ -1,44 +1,29 @@
-﻿// Saves options to chrome sync storage.
-function saveOptions() {
-	chrome.storage.sync.set({
-		"openBookmarkFolder1": document.getElementById("BookmarkFolderId1").value,
-		"openBookmarkFolder2": document.getElementById("BookmarkFolderId2").value,
-		"openBookmarkFolder3": document.getElementById("BookmarkFolderId3").value,
-		"openBookmarkFolder4": document.getElementById("BookmarkFolderId4").value
-	});
+﻿// These are the command names and the sync settings keys where the bookmark folder IDs are stored.
+const settingKeys = ["openBookmarkFolder1", "openBookmarkFolder2", "openBookmarkFolder3", "openBookmarkFolder4"];
+
+/** Page load - load settings from sync storage and populate the fields with them. */
+document.addEventListener('DOMContentLoaded', async () => {
+	const settings = await chrome.storage.sync.get(settingKeys);
 	
-	var status = document.getElementById("status");
+	for (let key of settingKeys) {
+		if(settings[key])
+			document.getElementById(key).value = settings[key];
+	}
+});
+
+/** Save button click - read values from fields and save them to sync storage. */
+document.querySelector('#save').addEventListener('click', async () =>
+{
+	// Compile and save settings.
+	let settings = {};
+	for (let key of settingKeys)
+	{
+		settings[key] = document.getElementById(key).value
+	}
+	await chrome.storage.sync.set(settings);
+
+	// Flash an indicator to let the user know we saved.
+	var status = document.getElementById("divStatus");
 	status.innerHTML = "Options Saved.";
-	setTimeout(
-		function() {
-			status.innerHTML = "";
-		},
-		750
-	);
-}
-
-// Restores select box state to saved value from chrome sync storage.
-function loadOptions() {
-	chrome.storage.sync.get(
-		[
-			"openBookmarkFolder1",
-			"openBookmarkFolder2",
-			"openBookmarkFolder3",
-			"openBookmarkFolder4"
-		],
-		function(items) {
-			if(items["openBookmarkFolder1"])
-				document.getElementById("BookmarkFolderId1").value = items["openBookmarkFolder1"];
-			if(items["openBookmarkFolder2"])
-				document.getElementById("BookmarkFolderId2").value = items["openBookmarkFolder2"];
-			if(items["openBookmarkFolder3"])
-				document.getElementById("BookmarkFolderId3").value = items["openBookmarkFolder3"];
-			if(items["openBookmarkFolder4"])
-				document.getElementById("BookmarkFolderId4").value = items["openBookmarkFolder4"];
-		}
-	);
-}
-
-// Add the events to load/save from this page.
-document.addEventListener('DOMContentLoaded', loadOptions);
-document.querySelector('#save').addEventListener('click', saveOptions);
+	setTimeout(() => { status.innerHTML = ""; }, 750);
+});
